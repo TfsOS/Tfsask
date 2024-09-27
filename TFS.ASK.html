@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFS ASK!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .autocomplete {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            width: 60%;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        #pagination {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        // Mock data for autocomplete suggestions
+        var suggestions = [
+            "apple", 
+            "banana", 
+            "orange", 
+            "grape", 
+            "pineapple", 
+            "kiwi", 
+            "strawberry", 
+            "operating system", 
+            "photosynthesis", 
+            "mobile", 
+            "computer", 
+            "peripheral device", 
+            "how to make things", 
+            "artificial intelligence",
+            "machine learning", 
+            "web development", 
+            "data science", 
+            "blockchain",
+            "internet of things",
+            "cloud computing",
+            "augmented reality",
+            "virtual reality",
+            "cybersecurity",
+            "big data",
+            "robotics",
+            "nanotechnology",
+            "quantum computing",
+            "genetic engineering",
+            "space exploration"
+        ];
+
+        // Autocomplete function
+        function autocomplete(input) {
+            var autocompleteList = "";
+            var query = input.value.toLowerCase();
+            suggestions.forEach(function(suggestion) {
+                if (suggestion.toLowerCase().indexOf(query) !== -1) {
+                    autocompleteList += "<div>" + suggestion + "</div>";
+                }
+            });
+            document.getElementById("autocomplete").innerHTML = autocompleteList;
+        }
+
+        // Search function with case logic
+        function search() {
+            var query = document.getElementById("searchInput").value.toLowerCase();
+            var results = "";
+
+            switch(query) {
+                case "apple":
+                    results = "You searched for an apple!";
+                    break;
+                case "banana":
+                    results = "You searched for a banana!";
+                    break;
+                case "orange":
+                    results = "You searched for an orange!";
+                    break;
+                case "grape":
+                    results = "You searched for grapes!";
+                    break;
+                case "pineapple":
+                    results = "You searched for a pineapple!";
+                    break;
+                case "kiwi":
+                    results = "You searched for a kiwi!";
+                    break;
+                case "strawberry":
+                    results = "You searched for strawberries!";
+                    break;
+                case "operating system":
+                    results = "An operating system (OS) is a software that manages computer hardware and software resources and provides common services for computer programs.";
+                    break;
+                case "photosynthesis":
+                    results = "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll.";
+                    break;
+                case "mobile":
+                    results = "A mobile device is a computing device small enough to hold and operate in the hand, such as a smartphone or tablet.";
+                    break;
+                case "computer":
+                    results = "A computer is a programmable electronic device that processes data using instructions to produce desired results.";
+                    break;
+                case "peripheral device":
+                    results = "A peripheral device is an auxiliary device used to put information into and get information out of the computer.";
+                    break;
+                case "how to make things":
+                    results = "To make things, you need a clear idea of what you want to create, materials required, and steps to follow. It often involves designing, planning, and assembling.";
+                    break;
+                case "artificial intelligence":
+                    results = "Artificial intelligence (AI) is the simulation of human intelligence processes by machines, especially computer systems.";
+                    break;
+                case "machine learning":
+                    results = "Machine learning is a subset of artificial intelligence that provides systems the ability to automatically learn and improve from experience without being explicitly programmed. <h3><p>www.sites.google.com/view/tfs-website</p></h3>";
+                    break;
+                case "web development":
+                    results = "Web development is the process of building and maintaining websites, encompassing web design, web content development, client-side/server-side scripting, and web server configuration.";
+                    break;
+                case "data science":
+                    results = "Data science is an interdisciplinary field that uses scientific methods, algorithms, and systems to extract insights and knowledge from structured and unstructured data.";
+                    break;
+                case "blockchain":
+                    results = "Blockchain is a decentralized, distributed ledger technology that records transactions across multiple computers in a way that ensures the security, transparency, and immutability of the data.";
+                    break;
+                case "internet of things":
+                    results = "The Internet of Things (IoT) is the network of physical devices, vehicles, appliances, and other items embedded with sensors, software, and network connectivity that enable them to collect and exchange data.";
+                    break;
+                case "cloud computing":
+                    results = "Cloud computing is the delivery of computing services—including servers, storage, databases, networking, software, analytics, and intelligence—over the Internet ('the cloud') to offer faster innovation, flexible resources, and economies of scale.";
+                    break;
+                case "augmented reality":
+                    results = "Augmented reality (AR) is an interactive experience of a real-world environment where the objects that reside in the real world are enhanced by computer-generated perceptual information.";
+                    break;
+                case "virtual reality":
+                    results = "Virtual reality (VR) is a simulated experience that can be similar to or completely different from the real world. Applications of VR include entertainment, education, training, and therapy.";
+                    break;
+                case "cybersecurity":
+                    results = "Cybersecurity refers to the practice of protecting systems, networks, and programs from digital attacks. These attacks are usually aimed at accessing, changing, or destroying sensitive information; extorting money from users; or interrupting normal business processes.";
+                    break;
+                case "big data":
+                    results = "Big data refers to large and complex data sets that are difficult to process using traditional data processing applications. Big data analytics examines large amounts of data to uncover hidden patterns, correlations, and other insights.";
+                    break;
+                case "robotics":
+                    results = "Robotics is an interdisciplinary field that integrates computer science and engineering to create machines capable of performing tasks that humans typically do. Robotics involves design, construction, operation, and use of robots.";
+                    break;
+                case "nanotechnology":
+                    results = "Nanotechnology is the manipulation of matter on an atomic, molecular, and supramolecular scale. It has applications in various fields such as electronics, medicine, energy production, and materials science.";
+                    break;
+                case "quantum computing":
+                    results = "Quantum computing harnesses the principles of quantum mechanics to process information in a fundamentally different way from classical computing. It has the potential to solve certain problems much faster than classical computers.";
+                    break;
+                case "genetic engineering":
+                    results = "Genetic engineering is the manipulation of an organism's genetic material using biotechnology. It allows scientists to modify DNA sequences and introduce new traits or characteristics into an organism.";
+                    break;
+                case "space exploration":
+                    results = "Space exploration is the investigation and study of outer space, including the exploration of celestial bodies such as planets and moons, as well as the search for extraterrestrial life.";
+                    break;
+                case "tfs store":
+                    results = "buy from tfs store! there are many things you can buy.!!"
+                    break;
+                default:
+                    results = "No results found for: " + query;
+                    break;
+            }
+
+            document.getElementById("results").innerHTML = "<p>" + results + "</p>";
+        }
+
+        // Event listeners
+        document.getElementById("searchInput").addEventListener("input", function() {
+            autocomplete(this);
+        });
+
+        document.addEventListener("click", function(e) {
+            if (!document.getElementById("autocomplete").contains(e.target)) {
+                document.getElementById("autocomplete").innerHTML = "";
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>TFS ASK!</h1>
+      <h3>enter text to search</h3>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Enter your search query">
+            <div id="autocomplete" class="autocomplete"></div>
+            <button onclick="search()">Search</button>
+        </div>
+        <div id="results"></div>
+        <div id="pagination"></div>
+    </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  email: tfsofficial1890official@gmail.com
+  copyright 2024 TFS
+  <p>ALL RIGHTS RESERVED.</p>
+  
+  TFS
+</body>
+</html>
